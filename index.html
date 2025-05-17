@@ -11,7 +11,15 @@
             margin: 0 auto;
             padding: 20px;
         }
-
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            display: inline-block;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
         button {
             background-color: #4CAF50;
             color: white;
@@ -30,15 +38,6 @@
             border: 1px solid #ddd;
             border-radius: 4px;
             background-color: #f9f9f9;
-            font-family: 'Dancing Script', cursive;
-            font-size: 24px;
-            color: #ff5722;
-            text-shadow: 2px 2px 4px #000000;
-            animation: clignoter 1s infinite alternate;
-        }
-        @keyframes clignoter {
-            from { opacity: 1; }
-            to { opacity: 0.5; }
         }
     </style>
     <script>
@@ -125,6 +124,3 @@
     <p id="resultat"></p>
 </body>
 </html>
-
-
-
