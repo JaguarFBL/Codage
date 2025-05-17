@@ -4,16 +4,72 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Transformateur de Texte en Emoji</title>
+    <script>
+        function texteVersEmoji(texte) {
+            const lettreVersEmoji = {
+                'a': '🍎', 'b': '🍌', 'c': '🍒', 'd': '🍓', 'e': '🍈',
+                'f': '🍉', 'g': '🍊', 'h': '🍋', 'i': '🍌', 'j': '🍍',
+                'k': '🥝', 'l': '🍅', 'm': '🍆', 'n': '🥜', 'o': '🍊',
+                'p': '🍐', 'q': '🍑', 'r': '🍒', 's': '🍏', 't': '🍎',
+                'u': '🥥', 'v': '🍇', 'w': '🍉', 'x': '🍈', 'y': '🍋',
+                'z': '🍌', ' ': '⬜'
+            };
+
+            let texteEmoji = '';
+            for (let lettre of texte.toLowerCase()) {
+                texteEmoji += lettreVersEmoji[lettre] || lettre;
+            }
+
+            return texteEmoji;
+        }
+
+        function emojiVersTexte(texteEmoji) {
+            const emojiVersLettre = {
+                '🍎': 'a', '🍌': 'b', '🍒': 'c', '🍓': 'd', '🍈': 'e',
+                '🍉': 'f', '🍊': 'g', '🍋': 'h', '🍌': 'i', '🍍': 'j',
+                '🥝': 'k', '🍅': 'l', '🍆': 'm', '🥜': 'n', '🍊': 'o',
+                '🍐': 'p', '🍑': 'q', '🍒': 'r', '🍏': 's', '🍎': 't',
+                '🥥': 'u', '🍇': 'v', '🍉': 'w', '🍈': 'x', '🍋': 'y',
+                '🍌': 'z', '⬜': ' '
+            };
+
+            let texte = '';
+            for (let emoji of texteEmoji) {
+                texte += emojiVersLettre[emoji] || emoji;
+            }
+
+            return texte;
+        }
+
+        function transformer() {
+            const texte = document.getElementById('texte').value;
+            const action = document.querySelector('input[name="action"]:checked').value;
+            let resultat;
+
+            if (action === "texte_vers_emoji") {
+                resultat = texteVersEmoji(texte);
+            } else if (action === "emoji_vers_texte") {
+                resultat = emojiVersTexte(texte);
+            }
+
+            document.getElementById('resultat').innerText = resultat;
+        }
+    </script>
 </head>
 <body>
     <h1>Transformateur de Texte en Emoji</h1>
-    <form action="traitement.php" method="post">
+    <form onsubmit="event.preventDefault(); transformer();">
         <label for="texte">Texte :</label>
         <input type="text" id="texte" name="texte" required>
         <br><br>
-        <button type="submit" name="action" value="texte_vers_emoji">Transformer en Emoji</button>
-        <button type="submit" name="action" value="emoji_vers_texte">Transformer en Texte</button>
+        <input type="radio" id="texte_vers_emoji" name="action" value="texte_vers_emoji" checked>
+        <label for="texte_vers_emoji">Transformer en Emoji</label>
+        <input type="radio" id="emoji_vers_texte" name="action" value="emoji_vers_texte">
+        <label for="emoji_vers_texte">Transformer en Texte</label>
+        <br><br>
+        <button type="submit">Transformer</button>
     </form>
+    <p id="resultat"></p>
 </body>
 </html>
 
